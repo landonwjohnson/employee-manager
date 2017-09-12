@@ -2,8 +2,20 @@ import React, { Component } from 'react';
 
 class EmployeeEditor extends Component {
   // constructor
-
+  constructor(){
+    super();
+    this.state = {
+      employee: null,
+      originalEmployee: null,
+      notModified: true
+    }
+    this.save = this.save.bind( this );
+    this.cancel = this.cancel.bind( this );
+  }
   // componentWillReceiveProps
+  componentWillRecieveProps(props) {
+    this.setState({employee: Object.assign({})})
+  }
 
   // handleChange
 

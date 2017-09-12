@@ -1,15 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans');
+
 #app {
   height: 100vh;
 }
 
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+
+}
+
+.titleBar .titleText {
+  font-family: 'MontSerrat';
+  text-transform: uppercase; 
 }
 
 /* Container Elements */
 .titleBar {
+
   width: 100%;
   height: 64px;
   background-color: #ffffff;
@@ -18,11 +27,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  
+
 }
 
 .infoCard {
   width: 405px;
-  height: 300px;
+  height: 330px;
   border-radius: 2px;
   background-color: #ffffff;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
@@ -39,6 +50,8 @@ body {
     margin-right: 15px;
     margin-top: 10px;
     border-radius: 2px;
+   
+    
     /*box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);*/
 }
 
@@ -148,6 +161,7 @@ body {
   padding: 10px 10px;
   user-select: none;
   border-radius: 2px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .listText:hover {
@@ -170,6 +184,7 @@ body {
   line-height: 1.33;
   color: rgba(0, 0, 0, 0.5);
   color: var(--black-50);
+ 
 }
 
 .labelTextSelected {
@@ -177,6 +192,7 @@ body {
   font-size: 12px;
   line-height: 1.33;
   color: #3fbaf9;
+ 
 }
 
 .inputText {

@@ -8,16 +8,31 @@ class EmployeeEditor extends Component {
       originalEmployee: null,
       notModified: true
     };
+    this.save = this.save.bind( this );
+    this.cancel = this.cancel.bind( this );
   }
 
   // componentWillReceiveProps
-
+  componentWillReceiveProps(props) {
+    this.setState({ employee: Object.assign({}, props.selected), originalEmployee: props.selected, notModified: true});
+  }
   // handleChange
+  handleChange(prop, val){
+    if (this.state.notModified ){
+      this.setState({ notModified: false })
+    }
+
+    var employeeCopy = Object.assign({}, this.state.employee);
+    employeeCopy[prop] = val;
+    this.setState({ employee: employeeCopy })
+
+  }
 
   save() {
     this.state.originalEmployee.updateName(this.state.employee.name);
     this.state.originalEmployee.updatePhone(this.state.employee.phone);
     this.state.originalEmployee.updateTitle(this.state.employee.title);
+    this.state.originalEmployee.updateLocation(this.state.employee.location);
     this.setState({ notModified: true });
     this.props.refreshList();
   }
@@ -46,6 +61,8 @@ class EmployeeEditor extends Component {
             <input className="materialInput" value={ this.state.employee.phone } onChange={ (e) => { this.handleChange('phone', e.target.value) } }></input>
             <span className="placeholderText"> Title </span>
             <input className="materialInput" value={ this.state.employee.title } onChange={ (e) => { this.handleChange('title', e.target.value) } }></input>
+            <span className="placeholderText"> Office Location </span>
+            <input className="materialInput" value={ this.state.employee.location} onChange={ (e) => { this.handleChange('location', e.target.value) } }></input>
           </div>
           :
           <p id="noEmployee"> No Employee Selected </p>
