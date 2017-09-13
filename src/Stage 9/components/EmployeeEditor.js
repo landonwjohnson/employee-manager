@@ -13,15 +13,33 @@ class EmployeeEditor extends Component {
     this.cancel = this.cancel.bind( this );
   }
   // componentWillReceiveProps
-  componentWillRecieveProps(props) {
-    this.setState({employee: Object.assign({})})
+  componentWillReceiveProps(props) {
+    this.setState({employee: Object.assign({}, props.selected), originalEmployee: props.selected, notModified: true});
   }
 
   // handleChange
-
+  handleChange(prop, val) {
+    if( this.state.notModified ) {
+      this.setState({ notModified: false })
+    }
+    var employeeCopy = Object.assign({}, this.state.employee);
+    employeeCopy[prop] = val;
+    this.setState({ employee: employeeCopy})
+  }
   // save
-
+  save() {
+    this.state.originalEmployee.updateName(this.state.employee.name);
+    this.state.originalEmployee.updatePhone(this.state.employee.phone);
+    this.state.originalEmployee.updateTitle(this.state.employee.title);
+    this.state.originalEmployee.updateLocation(this.state.employee.location);
+    this.setState({ notModified: true });
+    this.props.refreshList();
+  }
   // cancel
+  cancel() {
+    var employeeCopy = Object.assign({}, this.state.employee.name);
+    this.setState({employee: employeeCopy, notModified: true});
+  }
   
   render() {
     return (
@@ -42,6 +60,8 @@ class EmployeeEditor extends Component {
             <input className="materialInput" value={ this.state.employee.phone } onChange={ (e) => { this.handleChange('phone', e.target.value) } }></input>
             <span className="placeholderText"> Title </span>
             <input className="materialInput" value={ this.state.employee.title } onChange={ (e) => { this.handleChange('title', e.target.value) } }></input>
+            <span className="placeholderText"> Office Location </span>
+            <input className="materialInput" value={ this.save.employee.location } onChange={ (e) => { this.handleChange('location', e.target.value) } }> </input>
           </div>
           :
           <p id="noEmployee"> No Employee Selected </p>
