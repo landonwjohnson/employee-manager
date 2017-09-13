@@ -2,21 +2,22 @@ import React, { Component } from 'react';
 
 class EmployeeEditor extends Component {
   // constructor
-  constructor(){
+  constructor() {
     super();
     this.state = {
       employee: null,
       originalEmployee: null,
       notModified: true
     }
+
     this.save = this.save.bind( this );
     this.cancel = this.cancel.bind( this );
   }
+
   // componentWillReceiveProps
   componentWillReceiveProps(props) {
     this.setState({employee: Object.assign({}, props.selected), originalEmployee: props.selected, notModified: true});
   }
-
   // handleChange
   handleChange(prop, val) {
     if( this.state.notModified ) {
@@ -40,7 +41,6 @@ class EmployeeEditor extends Component {
     var employeeCopy = Object.assign({}, this.state.employee.name);
     this.setState({employee: employeeCopy, notModified: true});
   }
-  
   render() {
     return (
       <div className="infoCard">
@@ -61,7 +61,7 @@ class EmployeeEditor extends Component {
             <span className="placeholderText"> Title </span>
             <input className="materialInput" value={ this.state.employee.title } onChange={ (e) => { this.handleChange('title', e.target.value) } }></input>
             <span className="placeholderText"> Office Location </span>
-            <input className="materialInput" value={ this.save.employee.location } onChange={ (e) => { this.handleChange('location', e.target.value) } }> </input>
+            <input className="materialInput" value={ this.state.employee.location } onChange={ (e) => { this.handleChange('location', e.target.value) }}></input>
           </div>
           :
           <p id="noEmployee"> No Employee Selected </p>
